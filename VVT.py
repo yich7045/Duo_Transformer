@@ -106,8 +106,8 @@ class VisionTransformer(nn.Module):
         if first_layer_trans:
             v_patched_img, v_patched_tactile = self.vision_patch_embed(x, tactile)
             t_patched_img, t_patched_tactile = self.tactile_patch_embed(x, tactile)
-            v_x, v_t = v_patched_img + self.interpolate_pos_encoding()[0], v_patched_tactile + + self.interpolate_pos_encoding()[1]
-            t_x, t_t = t_patched_img + self.interpolate_pos_encoding()[2], v_patched_tactile + + self.interpolate_pos_encoding()[3]
+            v_x, v_t = v_patched_img + self.interpolate_pos_encoding()[0], v_patched_tactile + self.interpolate_pos_encoding()[1]
+            t_x, t_t = t_patched_img + self.interpolate_pos_encoding()[2], v_patched_tactile + self.interpolate_pos_encoding()[3]
             return self.v_vision_pos_drop(v_x), self.v_tactile_pos_drop(v_t), self.t_vision_pos_drop(t_x), self.t_tactile_pos_drop(t_t)
         else:
             B, S,_,_ = x.shape
